@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Wife ❤️</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffe6e6; /* Soft romantic pink */
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+    transition: background-color 1s;
+  }
+  
+  /* The pulsating heart */
+  .heart-container {
+    cursor: pointer;
+    transition: transform 0.3s;
+    text-align: center;
+  }
+  .heart-container:hover {
+    transform: scale(1.1);
+  }
+  .heart {
+    position: relative;
+    width: 100px;
+    height: 90px;
+    animation: pulse 1s infinite;
+    margin: 0 auto;
+  }
+  .heart::before,
+  .heart::after {
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: #ff3333;
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+  .heart::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  
+  /* The explosion animation */
+  .explode {
+    animation: explodeAnim 0.8s forwards;
+  }
+  @keyframes explodeAnim {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(4); opacity: 0.8; }
+    100% { transform: scale(10); opacity: 0; display: none; }
+  }
+  
+  .click-text {
+    color: #ff3333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+
+  /* Revealed message */
+  .message {
+    display: none;
+    font-size: 4rem;
+    color: #d63031;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Photo Collage */
+  .collage {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 900px;
+    width: 90%;
+    opacity: 0;
+    animation: fadeIn 2s forwards 0.5s; /* slightly delayed fade in */
+  }
+  .collage img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+  }
+  .collage img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Responsive for mobile */
+  @media (max-width: 768px) {
+    .collage {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .message {
+      font-size: 2.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Initial Heart View -->
+<div class="heart-container" id="heartBox" onclick="triggerMagic()">
+  <div class="heart" id="heart"></div>
+  <div class="click-text">Click My Heart</div>
+</div>
+
+<!-- Hidden Message and Collage View -->
+<div class="message" id="message">I Love You!</div>
+
+<div class="collage" id="collage">
+  <!-- REPLACE THE 'src' LINKS BELOW WITH YOUR ACTUAL IMAGES -->
+  <img src="C:\Users\6623682\Downloads\WhatsApp Image 2026-05-27 at 17.01.24.jpeg" alt="Memory 1">
+  <img src="C:\Users\6623682\Downloads\WhatsApp Image 2026-05-27 at 17.01.23 (1).jpeg" alt="Memory 2">
+  <img src="C:\Users\6623682\Downloads\WhatsApp Image 2026-05-27 at 17.01.23.jpeg" alt="Memory 3">
+  <img src="C:\Users\6623682\Downloads\WhatsApp Image 2026-05-27 at 17.01.23.jpeg" alt="Memory 4">
+  <img src="C:\Users\6623682\Downloads\WhatsApp Image 2026-05-27 at 17.01.22 (1).jpeg" alt="Memory 5">
+  <img src="C:\Users\6623682\Downloads\WhatsApp Image 2026-05-27 at 17.01.22.jpeg" alt="Memory 6">
+</div>
+
+<script>
+  function triggerMagic() {
+    var heartBox = document.getElementById('heartBox');
+    var heart = document.getElementById('heart');
+    var message = document.getElementById('message');
+    var collage = document.getElementById('collage');
+
+    // 1. Add explode animation to the heart
+    heart.classList.add('explode');
+    heartBox.style.pointerEvents = 'none'; // Stop them from double-clicking
+    document.querySelector('.click-text').style.display = 'none';
+    
+    // 2. Wait for explosion to finish, then show the message and collage
+    setTimeout(function() {
+      heartBox.style.display = 'none';
+      
+      message.style.display = 'block';
+      collage.style.display = 'grid';
+      
+      // Adjust the layout to make room for the big collage
+      document.body.style.backgroundColor = '#fff5f5';
+      document.body.style.justifyContent = 'flex-start';
+      document.body.style.paddingTop = '5vh';
+      document.body.style.paddingBottom = '5vh';
+      
+    }, 800); // 800 milliseconds matches the explosion speed in CSS
+  }
+</script>
+
+</body>
+</html>
